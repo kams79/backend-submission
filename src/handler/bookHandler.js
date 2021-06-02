@@ -20,9 +20,9 @@ const postBookHandler = async (request, h) => {
     const response = h.response({
       status: 'success',
       message: 'Buku berhasil ditambahkan',
-      data: { id },
+      data: { bookId: id },
     });
-    response.code(200);
+    response.code(201);
 
     return response;
   } catch (e) {
@@ -56,10 +56,13 @@ const postBookHandler = async (request, h) => {
 
 //#region get all book
 const getAllBooksHandler = async (request, h) => {
-  const books = await Book.find({});
+  const getAll = await Book.find({});
+  const books = getAll.map((book) => book.toClient());
   const response = h.response({
     status: 'success',
-    data: { books },
+    data: {
+      books,
+    },
   });
   response.code(200);
   return response;
@@ -70,7 +73,8 @@ const getAllBooksHandler = async (request, h) => {
 const getBookByIdHandler = async (request, h) => {
   try {
     const { id } = request.params;
-    const book = await Book.findOne({ _id: id });
+    const getbook = await Book.findOne({ _id: id });
+    const book = getbook.toAll();
     let response;
     if (book !== null) {
       response = h.response({
