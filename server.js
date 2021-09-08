@@ -2,7 +2,7 @@ import Hapi from '@hapi/hapi';
 import mongoose from 'mongoose';
 import { bodyRoutes, pathRoutes, queryRoutes } from './src/routes/bookRoutes';
 
-mongoose.connect('mongodb+srv://atlasdb-dicodingsub:Si7hpXQDnca2cb2Q@cluster0.i6eo5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+mongoose.connect('MONGODB', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
